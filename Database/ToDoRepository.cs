@@ -1,6 +1,7 @@
-/*using System;
 using System.Collections.Generic;
 using System.Linq;
+using ToDo.Models;
+using ToDo.Models.DTO;
 
 namespace ToDo.Database
 {
@@ -13,9 +14,10 @@ namespace ToDo.Database
             _context = context;
         }
 
-        public void CreateUsers(IEnumerable<User> users)
+        public UserDTO CreateUser(User user)
         {
-            _context.Users.AddRange(users);
+            user = _context.Users.Add(user).Entity;
+            return UserDTO.Map(user);
         }
 
         public User VerifyUser(string email, string passwordHash)
@@ -24,57 +26,45 @@ namespace ToDo.Database
             return user;
         }
 
-        public User ReadUser(int id)
+        public UserDTO ReadUser(int id)
         {
-            User user = _context.Users.Where(x => x.Id == id).Single();
-            return user;
+            var user = _context.Users.Find(id);
+            return UserDTO.Map(user);
         }
 
-        public User UpdateUser(User user)
+        public UserDTO UpdateUser(User user)
         {
             user = _context.Users.Update(user).Entity;
-            return user;
+            return UserDTO.Map(user);
         }
 
-        public Group CreateGroup(Group group)
+        public Assignment CreateAssignment(Assignment assignment)
         {
-            group = _context.Groups.Add(group).Entity;
-            return group;
+            assignment = _context.Assignments.Add(assignment).Entity;
+            return assignment;
         }
 
-        public Group UpdateGroup(Group group)
+        public Assignment ReadAssignment(int id)
         {
-            group = _context.Groups.Update(group).Entity;
-            return group;
+            var assignment = _context.Assignments.Find(id);
+            return assignment;
         }
 
-        public Group ReadGroup(string name)
+        public IEnumerable<Assignment> ReadAllAssignmentsByUserId(int userId)
         {
-            Group group = _context.Groups.Where(x => x.Name == name).Single();
-            return group;
+            var assignments = _context.Assignments.Where(x => x.User.Id == userId).AsEnumerable();
+            return assignments;
         }
 
-        public IEnumerable<Student> ReadStudents(int[] ids)
+        public Assignment UpdateAssignment(Assignment assignment)
         {
-            var students = _context.Students.Where(x => ids.Contains(x.Id));
-            return students;
+            assignment = _context.Assignments.Update(assignment).Entity;
+            return assignment;
         }
 
-        public Lesson CreateLesson(Lesson lesson)
+        public void DeleteAssignment(int id)
         {
-            lesson = _context.Lessons.Add(lesson).Entity;
-            return lesson;
-        }
-
-        public Lesson ReadLesson(int lessonId)
-        {
-            Lesson lesson = _context.Lessons.Where(x => x.Id == lessonId).Single();
-            return lesson;
-        }
-
-        public void CreateAttendance(IEnumerable<Attendance> attendances)
-        {
-            _context.Attendances.AddRange(attendances);
+            _context.Assignments.Remove(_context.Assignments.Find(id));
         }
 
         public void SaveChanges()
@@ -82,4 +72,4 @@ namespace ToDo.Database
             _context.SaveChanges();
         }
     }
-}*/
+}
