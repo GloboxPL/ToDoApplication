@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace ToDo.Pages
     {
         private readonly IToDoRepository _toDoRepository;
 
-        public IEnumerable<Assignment> AssignmentsBase { get; private set; }
+        public IEnumerable<Assignment> AssignmentsBase { get; private set; } = new List<Assignment>();
 
-        public IEnumerable<Assignment> AssignmentsToDisplay { get; set; }
+        public IEnumerable<Assignment> AssignmentsToDisplay { get; set; } = new List<Assignment>();
 
         public AssignmentsModel(IToDoRepository toDoRepository)
         {
@@ -21,58 +22,78 @@ namespace ToDo.Pages
 
         public void OnGet()
         {
-            AssignmentsBase = _toDoRepository.ReadAllAssignmentsByUserId(0);
-            //GetAllAssignments();
+            //AssignmentsBase = _toDoRepository.ReadAllAssignmentsByUserId(0);
+            //AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
         }
 
-        public void GetAllAssignments()
+        public IActionResult OnGetAllAssignments()
         {
             AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
+
+            return Page();
         }
 
-        public void GetDoneAssignments()
+        public IActionResult OnGetDoneAssignments()
         {
             AssignmentsToDisplay = AssignmentsBase.Where(a => a.IsDone).ToList();
+
+            return Page();
         }
 
-        public void GetNotDoneAssignments()
+        public IActionResult OnGetNotDoneAssignments()
         {
             AssignmentsToDisplay = AssignmentsBase.Where(a => !a.IsDone).ToList();
+
+            return Page();
         }
 
-        public void GetActiveAssignments()
+        public IActionResult OnGetActiveAssignments()
         {
             AssignmentsToDisplay = AssignmentsBase.Where(a => !a.IsDone).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByDeadlineAscending()
+        public IActionResult OnGetSortedCollectionByDeadlineAscending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.Deadline).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByDeadlineDescending()
+        public IActionResult OnGetSortedCollectionByDeadlineDescending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.Deadline).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByImportanceAscending()
+        public IActionResult OnGetSortedCollectionByImportanceAscending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.IsImportant).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByImportanceDescending()
+        public IActionResult OnGetSortedCollectionByImportanceDescending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.IsImportant).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByNameAscending()
+        public IActionResult OnGetSortedCollectionByNameAscending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.Name).ToList();
+
+            return Page();
         }
 
-        public void SortCollectionByNameDescending()
+        public IActionResult OnGetSortedCollectionByNameDescending()
         {
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.Name).ToList();
+
+            return Page();
         }
     }
 }
