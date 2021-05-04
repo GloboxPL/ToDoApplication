@@ -5,11 +5,11 @@ using ToDo.Models.DTO;
 
 namespace ToDo.Database
 {
-    public class ToDoDbRepository : IToDoRepository
+    public class ToDoRepository : IToDoRepository
     {
         private readonly ToDoContext _context;
 
-        public ToDoDbRepository(ToDoContext context)
+        public ToDoRepository(ToDoContext context)
         {
             _context = context;
         }
