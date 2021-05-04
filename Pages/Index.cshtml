@@ -5,6 +5,20 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">What would you like to learn today? 😀</h1>
+</div>
+<div class="card-columns">
+    @foreach (var item in Model.Technologies)
+    {
+        <div class="card bg-warning" style="width: 18rem;">
+            <img class="card-img-top" src=@item.Value alt="Image">
+            <div class="card-body">
+                <h5 class="card-title">@item.Key</h5>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    <p>Learn more about <a href="https://docs.microsoft.com/aspnet/core"> Web apps with ASP.NET Core</a> from official
+        documentation.</p>
 </div>
