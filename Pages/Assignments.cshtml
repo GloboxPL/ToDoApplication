@@ -16,12 +16,61 @@
         <div class="col-4">
             <div class="text-center">
                 <p>Select assignments:</p>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Assignments Type
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">All</a>
+                        <a class="dropdown-item" href="#">Done</a>
+                        <a class="dropdown-item" href="#">Not Done</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-4">
             <div class="text-center">
-                <p>Filtering:</p>
+                <p>Filter by:</p>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Selection option...
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Deadline - Ascending</a>
+                        <a class="dropdown-item" href="#">Deadline - Descending</a>
+                        <a class="dropdown-item" href="#">Importance - Ascending</a>
+                        <a class="dropdown-item" href="#">Importance - Descending</a>
+                        <a class="dropdown-item" href="#">Name - Ascending</a>
+                        <a class="dropdown-item" href="#">Name - Descending</a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Important</th>
+                        <th scope="col">Done</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>To Do</td>
+                        <td>04-05-2021</td>
+                        <td>True</td>
+                        <td>False</td>
+                        <td>Lorem ipsum homie</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -22,7 +22,7 @@ namespace ToDo.Pages
         public void OnGet()
         {
             AssignmentsBase = _toDoRepository.ReadAllAssignmentsByUserId(0);
-            GetAllAssignments();
+            //GetAllAssignments();
         }
 
         public void GetAllAssignments()
