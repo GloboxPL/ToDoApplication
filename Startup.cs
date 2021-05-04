@@ -25,6 +25,11 @@ namespace ToDo
             services.AddDbContext<ToDoContext>(optitons =>
                 optitons.UseNpgsql(Configuration.GetConnectionString("ToDoDatabase"))
             );
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +53,14 @@ namespace ToDo
 
             app.UseAuthorization();
 
+            app.UseCors("CorsPolicy");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action}");
             });
         }
     }
