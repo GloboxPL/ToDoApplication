@@ -22,7 +22,7 @@ namespace ToDo.Database
 
         public User VerifyUser(string email, string passwordHash)
         {
-            User user = _context.Users.Where(x => x.Email == email && x.Password == passwordHash).Single();
+            User user = _context.Users.Where(x => x.Email == email && x.Password == passwordHash).SingleOrDefault();
             return user;
         }
 
