@@ -19,9 +19,9 @@ namespace ToDo.Pages
         {
             _toDoRepository = toDoRepository;
         }
-        public void OnGet()
+        public IActionResult OnPost()
         {
-
+            return RedirectToPage("./Assignments");
         }
     }
 }

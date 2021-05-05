@@ -20,10 +20,13 @@ namespace ToDo.Pages
             _toDoRepository = toDoRepository;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            AssignmentsBase = new List<Assignment>() { new Assignment() };
             //AssignmentsBase = _toDoRepository.ReadAllAssignmentsByUserId(0);
-            //AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
+            AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
+
+            return Page();
         }
 
         public IActionResult OnGetAllAssignments()
