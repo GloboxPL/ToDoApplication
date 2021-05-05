@@ -1,0 +1,42 @@
+﻿@page
+@model ToDo.Pages.AddModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <div class="fadeIn first">
+            <h2 class="forms mt-4">Add another assignment</h2>
+        </div>
+        <form class="mt-3" method="post">
+            <input type="text" id="email" class="fadeIn second" placeholder="Name" asp-for="@Model.Name" />
+            <input type="datetime-local" id="email" class="fadeIn second" asp-for="@Model.Deadline" />
+            <textarea class="fadeIn second" placeholder="Description..." asp-for="@Model.Description"></textarea>
+            <div class="checkbox-wrapper d-flex justify-content-center">
+                <label>Important: </label>
+                <input class="checkbox align-middle" asp-for="@Model.IsImportant" />
+            </div>
+            <div class="checkbox-wrapper d-flex justify-content-center">
+                <label>Done: </label>
+                <input class="checkbox align-middle" asp-for="@Model.IsDone" />
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Selection Option
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineAscending">Black</a>
+                    <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineDescending">Green</a>
+                    <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceAscending">Red</a>
+                    <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceDescending">Blue</a>
+                    <a class="dropdown-item" asp-page-handler="SortedCollectionByNameAscending">Yellow</a>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary my-4" value="Confirm">
+        </form>
+        <div id="formFooter">
+            <a class="nav-link text-primary" asp-area="" asp-page="/Assignments">Back to Assignments</a>
+        </div>
+    </div>
+</div>

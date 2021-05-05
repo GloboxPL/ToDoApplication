@@ -27,11 +27,13 @@ namespace ToDo
             services.AddDbContext<ToDoContext>(optitons =>
                 optitons.UseNpgsql(Configuration.GetConnectionString("ToDoDatabase"))
             );
-             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddSwaggerGen(c => c.SwaggerDoc("1.0", new OpenApiInfo { Title = "ToDo Api", Version = "1.0" }));
+            services.AddScoped<IToDoRepository, ToDoRepository>();
 
         }
 
