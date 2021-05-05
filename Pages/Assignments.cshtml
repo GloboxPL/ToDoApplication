@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 justify-content-end">                 
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-page-handler="OnGetSignOutAsync">Sign Out</a>
                     </li>
@@ -32,7 +32,8 @@
             <div class="text-center">
                 <p>Select assignments:</p>
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Assignments Type
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -47,16 +48,22 @@
             <div class="text-center">
                 <p>Filter by:</p>
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Selection Option
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineAscending">Deadline - Ascending</a>
-                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineDescending">Deadline - Descending</a>
-                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceAscending">Importance - Ascending</a>
-                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceDescending">Importance - Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineAscending">Deadline -
+                            Ascending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineDescending">Deadline -
+                            Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceAscending">Importance -
+                            Ascending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceDescending">Importance -
+                            Descending</a>
                         <a class="dropdown-item" asp-page-handler="SortedCollectionByNameAscending">Name - Ascending</a>
-                        <a class="dropdown-item" asp-page-handler="SortedCollectionByNameDescending">Name - Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByNameDescending">Name -
+                            Descending</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +71,7 @@
         <div class="col-4">
             <div class="text-center">
                 <p>Add a new assignment: </p>
-                <a class="btn btn-primary" asp-area="" asp-page="/Add">Add assignment</a>
+                <a class="btn btn-primary" asp-area="" asp-page="/Edit">Add assignment</a>
             </div>
         </div>
     </div>
@@ -85,17 +92,18 @@
                 <tbody>
                     @foreach (Assignment assignment in Model.AssignmentsToDisplay)
                     {
-                     <tr>
-                        <th scope="row">@assignment.Id</th>
-                        <td>@assignment.Name</td>
-                        <td>@assignment.Deadline</td>
-                        <td>@assignment.IsImportant</td>
-                        <td>@assignment.IsDone</td>
-                        <td>@assignment.Description</td>
-                        <td>
-                            <a class="btn btn-primary" asp-area="" asp-page="/Edit">Edit</a>
-                        </td>
-                     </tr>
+                        <tr>
+                            <th scope="row">@assignment.Id</th>
+                            <td>@assignment.Name</td>
+                            <td>@assignment.Deadline</td>
+                            <td>@assignment.IsImportant</td>
+                            <td>@assignment.IsDone</td>
+                            <td>@assignment.Description</td>
+                            <td>
+                                <a class="btn btn-primary" asp-area="" asp-page="/Edit"
+                                asp-route-itemid=@assignment.Id>Edit</a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

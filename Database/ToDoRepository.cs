@@ -44,8 +44,9 @@ namespace ToDo.Database
             return UserDTO.Map(user);
         }
 
-        public Assignment CreateAssignment(Assignment assignment)
+        public Assignment CreateAssignment(Assignment assignment, int userId)
         {
+            assignment.User = _context.Users.Find(userId);
             assignment = _context.Assignments.Add(assignment).Entity;
             return assignment;
         }
@@ -62,9 +63,10 @@ namespace ToDo.Database
             return assignments;
         }
 
-        public Assignment UpdateAssignment(Assignment assignment)
+        public Assignment UpdateAssignment(Assignment assignment, int userId)
         {
-            assignment = _context.Assignments.Update(assignment).Entity;
+            assignment.User = _context.Users.Find(userId);
+            _context.Assignments.Update(assignment);
             return assignment;
         }
 
