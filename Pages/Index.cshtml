@@ -6,23 +6,19 @@
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
+ 
     <div class="fadeIn first">
-      <h2>LOGIN PAGE</h2>
+      <h2 class="forms mt-4">Sign In Page</h2>
     </div>
 
-    <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form class="mt-3">
+        <input type="text" id="email" class="fadeIn second" placeholder="Email" asp-for="@Model.Email" />
+        <input type="password" id="password" class="fadeIn third" placeholder="Password" asp-for="@Model.Password">
+        <input type="submit" class="fadeIn fourth mt-4" value="Sign In">
     </form>
 
-    <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="nav-link text-dark" asp-area="" asp-page="/Register">Register</a>
+      <a class="nav-link text-primary" asp-area="" asp-page="/Register">Register</a>
     </div>
 
   </div>

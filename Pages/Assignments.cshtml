@@ -13,12 +13,12 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center my-3">
+    <div class="row d-flex justify-content-center mt-3 mb-5">
         <div class="col-4">
             <div class="text-center">
                 <p>Select assignments:</p>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Assignments Type
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -33,7 +33,7 @@
             <div class="text-center">
                 <p>Filter by:</p>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Selection Option
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -51,7 +51,7 @@
             <div class="text-center">
                 <p>Add  assignment</p>
                 <div class="dropdown">
-                    <button class="btn btn-secondary" type="button"  asp-area="" asp-page="/Edit"> 
+                    <button class="btn btn-primary" type="button"  asp-area="" asp-page="/Add"> 
                         Add 
                     </button>
                    
@@ -61,8 +61,8 @@
     </div>
     <div class="row d-flex justify-content-center my-5">
         <div class="col-12">
-            <table class="table table-hover table-striped table-bordered">
-                <thead class="thead-dark">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
@@ -84,7 +84,7 @@
                         <td>@assignment.IsDone</td>
                         <td>@assignment.Description</td>
                         <td>
-                            <button>
+                            <button asp-area="" asp-page="/Edit">
                                 Edit
                             </button>
                         </td>
