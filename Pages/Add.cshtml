@@ -1,0 +1,25 @@
+﻿@page
+@model ToDo.Pages.AddModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <h2>Add another assignment</h2>
+        </div>
+
+        <!-- Login Form -->
+        <form>
+            <input type="text" id="name" class="fadeIn second" name="name" placeholder="Name">
+            <input type="text" id="deadline" class="fadeIn third" name="deadline" placeholder="Deadline">
+            <input type="text" id="important" class="fadeIn third" name="important" placeholder="Important">
+            <input type="text" id="done" class="fadeIn third" name="done" placeholder="Done">
+            <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description">
+            <input type="submit" class="btn btn-danger" value="Add">
+        </form>
+    </div>
+</div>
