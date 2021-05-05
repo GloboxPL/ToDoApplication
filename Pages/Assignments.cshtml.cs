@@ -103,11 +103,5 @@ namespace ToDo.Pages
 
             return Page();
         }
-
-        public async Task<IActionResult> OnGetSignOutAsync()
-        {
-            await HttpContext.SignOutAsync();
-            return Redirect("/");
-        }
     }
 }
