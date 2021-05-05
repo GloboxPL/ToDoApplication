@@ -27,15 +27,16 @@ namespace ToDo.Pages
 
         public IActionResult OnGet()
         {
-            AssignmentsBase = new List<Assignment>() { new Assignment() };
-            AssignmentsBase = _data.GetAssignments(HttpContext);
-            AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
+            Init();
 
             return Page();
         }
 
+
+
         public IActionResult OnGetAllAssignments()
         {
+            Init();
             AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
 
             return Page();
@@ -43,6 +44,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetDoneAssignments()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsBase.Where(a => a.IsDone).ToList();
 
             return Page();
@@ -50,6 +52,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetNotDoneAssignments()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsBase.Where(a => !a.IsDone).ToList();
 
             return Page();
@@ -57,6 +60,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetActiveAssignments()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsBase.Where(a => !a.IsDone).ToList();
 
             return Page();
@@ -64,6 +68,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByDeadlineAscending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.Deadline).ToList();
 
             return Page();
@@ -71,6 +76,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByDeadlineDescending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.Deadline).ToList();
 
             return Page();
@@ -78,6 +84,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByImportanceAscending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.IsImportant).ToList();
 
             return Page();
@@ -85,6 +92,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByImportanceDescending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.IsImportant).ToList();
 
             return Page();
@@ -92,6 +100,7 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByNameAscending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderBy(a => a.Name).ToList();
 
             return Page();
@@ -99,9 +108,17 @@ namespace ToDo.Pages
 
         public IActionResult OnGetSortedCollectionByNameDescending()
         {
+            Init();
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.Name).ToList();
 
             return Page();
+        }
+
+        private void Init()
+        {
+            AssignmentsBase = new List<Assignment>() { new Assignment() };
+            AssignmentsBase = _data.GetAssignments(HttpContext);
+            AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
         }
     }
 }
