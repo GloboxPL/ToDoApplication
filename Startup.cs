@@ -25,6 +25,8 @@ namespace ToDo
             services.AddDbContext<ToDoContext>(optitons =>
                 optitons.UseNpgsql(Configuration.GetConnectionString("ToDoDatabase"))
             );
+
+            services.AddScoped<IToDoRepository, ToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
