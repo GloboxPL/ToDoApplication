@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,12 @@ namespace ToDo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AllowAnonymousToPage("/Index");
+                options.Conventions.AllowAnonymousToPage("/Register");
+                options.Conventions.AuthorizePage("/Assignments");
+            });
 
             services.AddDbContext<ToDoContext>(optitons =>
                 optitons.UseNpgsql(Configuration.GetConnectionString("ToDoDatabase"))
@@ -32,9 +38,13 @@ namespace ToDo
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
-            services.AddSwaggerGen(c => c.SwaggerDoc("1.0", new OpenApiInfo { Title = "ToDo Api", Version = "1.0" }));
-            services.AddScoped<IToDoRepository, ToDoRepository>();
 
+            services.AddSwaggerGen(c => c.SwaggerDoc("1.0", new OpenApiInfo { Title = "ToDo Api", Version = "1.0" }));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,17 +66,18 @@ namespace ToDo
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-             app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
 
-             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action}");
-            });
+            app.UseEndpoints(endpoints =>
+           {
+               endpoints.MapRazorPages();
+               endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller}/{action}");
+           });
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

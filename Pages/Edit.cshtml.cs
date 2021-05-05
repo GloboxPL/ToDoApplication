@@ -2,18 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToDo.Database;
 using ToDo.Models;
+using ToDo.Services;
 
 namespace ToDo.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly IToDoRepository _toDoRepository;
+        private readonly Auth _auth;
 
         public Assignment Assignment { get; set; }
 
-        public EditModel(IToDoRepository toDoRepository)
+        public EditModel(ToDoContext context)
         {
-            _toDoRepository = toDoRepository;
+            _auth = new Auth(context);
         }
 
         public IActionResult OnGet()

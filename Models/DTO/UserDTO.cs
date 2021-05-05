@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 namespace ToDo.Models.DTO
 {
     public class UserDTO
@@ -5,7 +6,11 @@ namespace ToDo.Models.DTO
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string Surname { get; private set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Email { get; private set; }
+
+        public UserDTO() { }
 
         public UserDTO(int id, string name, string surname, string email)
         {

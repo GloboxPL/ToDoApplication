@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ToDo.Models;
 using ToDo.Models.DTO;
+using ToDo.Services;
 
 namespace ToDo.Database
 {
@@ -20,10 +21,15 @@ namespace ToDo.Database
             return UserDTO.Map(user);
         }
 
-        public User VerifyUser(string email, string passwordHash)
+        public UserDTO VerifyUser(string email, string password)
         {
-            User user = _context.Users.Where(x => x.Email == email && x.Password == passwordHash).SingleOrDefault();
-            return user;
+            User user = _context.Users.Where(x => x.Email == email).SingleOrDefault();
+            if (user == null) return null;
+            if (Hashing.Check(user.Password, password))
+            {
+                return UserDTO.Map(user);
+            }
+            return null;
         }
 
         public UserDTO ReadUser(int id)

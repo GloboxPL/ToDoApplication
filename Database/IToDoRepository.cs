@@ -7,7 +7,7 @@ namespace ToDo.Database
     public interface IToDoRepository
     {
         UserDTO CreateUser(User user);
-        User VerifyUser(string email, string passwordHash);
+        UserDTO VerifyUser(string email, string passwordHash);
         UserDTO ReadUser(int id);
         UserDTO UpdateUser(User user);
         Assignment CreateAssignment(Assignment assignment);

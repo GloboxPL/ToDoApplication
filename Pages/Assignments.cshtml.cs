@@ -1,29 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication;
 using System.Linq;
 using ToDo.Database;
 using ToDo.Models;
+using ToDo.Services;
+using System.Threading.Tasks;
 
 namespace ToDo.Pages
 {
     public class AssignmentsModel : PageModel
     {
-        private readonly IToDoRepository _toDoRepository;
+        private readonly Auth _auth;
+        private readonly DataAccess _data;
 
         public IEnumerable<Assignment> AssignmentsBase { get; private set; } = new List<Assignment>();
 
         public IEnumerable<Assignment> AssignmentsToDisplay { get; set; } = new List<Assignment>();
 
-        public AssignmentsModel(IToDoRepository toDoRepository)
+        public AssignmentsModel(ToDoContext context)
         {
-            _toDoRepository = toDoRepository;
+            _auth = new Auth(context);
+            _data = new DataAccess(context);
         }
 
         public IActionResult OnGet()
         {
             AssignmentsBase = new List<Assignment>() { new Assignment() };
-            //AssignmentsBase = _toDoRepository.ReadAllAssignmentsByUserId(0);
+            AssignmentsBase = _data.GetAssignments(HttpContext);
             AssignmentsToDisplay = new List<Assignment>(AssignmentsBase);
 
             return Page();
@@ -97,6 +102,12 @@ namespace ToDo.Pages
             AssignmentsToDisplay = AssignmentsToDisplay.OrderByDescending(a => a.Name).ToList();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnGetSignOutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
         }
     }
 }

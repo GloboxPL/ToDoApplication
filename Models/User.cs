@@ -22,6 +22,7 @@ namespace ToDo.Models
         [DataType(DataType.Password)]  
         [Display(Name = "Password")]
         public string Password { get; set; }
+        
         public virtual IList<Assignment> ToDos { get; set; } = new List<Assignment>();
 
         public User() { }
