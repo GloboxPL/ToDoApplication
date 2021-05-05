@@ -1,29 +1,30 @@
 ﻿@page
 @model ToDo.Pages.AssignmentsModel
+@using Models
 @{
     ViewData["Title"] = "Assignments";
 }
 
 <div class="container">
-    <div class="row">
+    <div class="row my-5">
         <div class="col">
             <div class="text-center">
                 <h4 class="">Assignments</h4>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mt-3 mb-5">
         <div class="col-4">
             <div class="text-center">
                 <p>Select assignments:</p>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Assignments Type
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">All</a>
-                        <a class="dropdown-item" href="#">Done</a>
-                        <a class="dropdown-item" href="#">Not Done</a>
+                        <a class="dropdown-item" asp-page-handler="AllAssignments">All</a>
+                        <a class="dropdown-item" asp-page-handler="DoneAssignments">Done</a>
+                        <a class="dropdown-item" asp-page-handler="NotDoneAssignments">Not Done</a>
                     </div>
                 </div>
             </div>
@@ -32,16 +33,16 @@
             <div class="text-center">
                 <p>Filter by:</p>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Selection option...
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Selection Option
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Deadline - Ascending</a>
-                        <a class="dropdown-item" href="#">Deadline - Descending</a>
-                        <a class="dropdown-item" href="#">Importance - Ascending</a>
-                        <a class="dropdown-item" href="#">Importance - Descending</a>
-                        <a class="dropdown-item" href="#">Name - Ascending</a>
-                        <a class="dropdown-item" href="#">Name - Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineAscending">Deadline - Ascending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByDeadlineDescending">Deadline - Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceAscending">Importance - Ascending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByImportanceDescending">Importance - Descending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByNameAscending">Name - Ascending</a>
+                        <a class="dropdown-item" asp-page-handler="SortedCollectionByNameDescending">Name - Descending</a>
                     </div>
                 </div>
             </div>
@@ -50,15 +51,18 @@
             <div class="text-center">
                 <p>Add  assignment</p>
                 <div class="dropdown">
-                        <a class="btn btn-secondary" type="button" asp-area="" asp-page="/Add">Add</a>
+                    <button class="btn btn-primary" type="button"  asp-area="" asp-page="/Add"> 
+                        Add 
+                    </button>
+                   
                 </div>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center my-5">
         <div class="col-12">
-            <table class="table table-hover table-striped table-bordered">
-                <thead class="thead-dark">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
@@ -70,16 +74,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>To Do</td>
-                        <td>04-05-2021</td>
-                        <td>True</td>
-                        <td>False</td>
-                        <td>Lorem ipsum homie</td>
-                        <td><button class="btn btn-danger" type="button" asp-area="" asp-page="/Add">
-                          Edit</button></td>
-                    </tr>
+                    @foreach (Assignment assignment in Model.AssignmentsToDisplay)
+                    {
+                     <tr>
+                        <th scope="row">@assignment.Id</th>
+                        <td>@assignment.Name</td>
+                        <td>@assignment.Deadline</td>
+                        <td>@assignment.IsImportant</td>
+                        <td>@assignment.IsDone</td>
+                        <td>@assignment.Description</td>
+                        <td>
+                            <button asp-area="" asp-page="/Edit">
+                                Edit
+                            </button>
+                        </td>
+                     </tr>
+                    }
                 </tbody>
             </table>
         </div>

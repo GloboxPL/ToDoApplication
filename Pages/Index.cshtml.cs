@@ -21,9 +21,7 @@ namespace ToDo.Pages
         }
         public void OnGet()
         {
-            // example how to get/set db data in controller
-            // _repo.CreateUser(new Models.User("John", "Kowalsky", "johny@mail.com", "passwordHash"));
-            // _repo.SaveChanges();
+
         }
     }
 }
