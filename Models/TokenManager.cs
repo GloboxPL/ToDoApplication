@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,9 +13,7 @@ namespace ToDo.Models
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var secret = "verySecretKey";
-
-            var key = Encoding.ASCII.GetBytes(secret.ToString());
+            var key = Encoding.ASCII.GetBytes("TheMostSecretKeyOfTheWorld");
 
             var tokenDescriptor = new SecurityTokenDescriptor{
                 Subject = new ClaimsIdentity(new Claim[]{
